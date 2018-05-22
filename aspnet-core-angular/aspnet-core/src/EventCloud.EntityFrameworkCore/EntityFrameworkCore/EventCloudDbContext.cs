@@ -2,6 +2,7 @@
 using Abp.Zero.EntityFrameworkCore;
 using EventCloud.Authorization.Roles;
 using EventCloud.Authorization.Users;
+using EventCloud.Blog.Notes;
 using EventCloud.Events;
 using EventCloud.MultiTenancy;
 
@@ -17,5 +18,8 @@ namespace EventCloud.EntityFrameworkCore
             : base(options)
         {
         }
+        public DbSet<Note> Notes { get; set; }
+        public DbSet<NoteBook> NoteBooks { get; set; }
+        public DbSet<NoteToNoteBook> NoteToNoteBook { get; set; }
     }
 }

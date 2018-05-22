@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { HttpModule, JsonpModule } from '@angular/http';
 
 import { ModalModule } from 'ngx-bootstrap';
@@ -35,6 +35,10 @@ import { MaterialInput } from '@shared/directives/material-input.directive';
 import { EventsComponent } from '@app/events/events.component';
 import { CreateEventComponent } from './events/create-event/create-event.component';
 import { EventDetailComponent } from './events/event-detail/event-detail.component';
+import { NoteComponent } from './blog/note/note.component';
+import { NoteBookComponent } from './blog/note-book/note-book.component';
+import { CreateNoteComponent } from './blog/note/create-note/create-note.component';
+import { EditNoteComponent } from './blog/note/edit-note/edit-note.component';
 
 @NgModule({
     declarations: [
@@ -58,7 +62,11 @@ import { EventDetailComponent } from './events/event-detail/event-detail.compone
         RightSideBarComponent,
         EventsComponent,
         CreateEventComponent,
-        EventDetailComponent
+        EventDetailComponent,
+        NoteComponent,
+        NoteBookComponent,
+        CreateNoteComponent,
+        EditNoteComponent
     ],
     imports: [
         CommonModule,
@@ -70,7 +78,8 @@ import { EventDetailComponent } from './events/event-detail/event-detail.compone
         AppRoutingModule,
         ServiceProxyModule,
         SharedModule,
-        NgxPaginationModule
+        NgxPaginationModule,
+        ReactiveFormsModule
     ],
     providers: [
 

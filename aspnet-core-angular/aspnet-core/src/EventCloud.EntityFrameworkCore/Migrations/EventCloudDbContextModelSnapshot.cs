@@ -22,8 +22,8 @@ namespace EventCloud.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.0.1-rtm-125")
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn)
+                .HasAnnotation("ProductVersion", "2.0.1-rtm-125");
 
             modelBuilder.Entity("Abp.Application.Editions.Edition", b =>
                 {
@@ -983,6 +983,94 @@ namespace EventCloud.Migrations
                     b.ToTable("AbpUsers");
                 });
 
+            modelBuilder.Entity("EventCloud.Blog.Notes.Note", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<long>("Collect");
+
+                    b.Property<string>("Content");
+
+                    b.Property<DateTime>("CreationTime");
+
+                    b.Property<long?>("CreatorUserId");
+
+                    b.Property<DateTime?>("DeletionTime");
+
+                    b.Property<string>("Des");
+
+                    b.Property<string>("Img");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<bool>("IsPublic");
+
+                    b.Property<DateTime?>("LastModificationTime");
+
+                    b.Property<long>("Like");
+
+                    b.Property<long>("Scan");
+
+                    b.Property<string>("Tags");
+
+                    b.Property<int>("TextType");
+
+                    b.Property<string>("Title");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Notes");
+                });
+
+            modelBuilder.Entity("EventCloud.Blog.Notes.NoteBook", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("CreationTime");
+
+                    b.Property<long?>("CreatorUserId");
+
+                    b.Property<DateTime?>("DeletionTime");
+
+                    b.Property<string>("Des");
+
+                    b.Property<string>("Img");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<DateTime?>("LastModificationTime");
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("NoteBooks");
+                });
+
+            modelBuilder.Entity("EventCloud.Blog.Notes.NoteToNoteBook", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("CreationTime");
+
+                    b.Property<long?>("CreatorUserId");
+
+                    b.Property<int>("NoteBookId");
+
+                    b.Property<int>("NoteId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NoteBookId");
+
+                    b.HasIndex("NoteId");
+
+                    b.ToTable("NoteToNoteBook");
+                });
+
             modelBuilder.Entity("EventCloud.Events.Event", b =>
                 {
                     b.Property<Guid>("Id")
@@ -1244,6 +1332,19 @@ namespace EventCloud.Migrations
                     b.HasOne("EventCloud.Authorization.Users.User", "LastModifierUser")
                         .WithMany()
                         .HasForeignKey("LastModifierUserId");
+                });
+
+            modelBuilder.Entity("EventCloud.Blog.Notes.NoteToNoteBook", b =>
+                {
+                    b.HasOne("EventCloud.Blog.Notes.NoteBook", "NoteBook")
+                        .WithMany()
+                        .HasForeignKey("NoteBookId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("EventCloud.Blog.Notes.Note", "Note")
+                        .WithMany()
+                        .HasForeignKey("NoteId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("EventCloud.Events.EventRegistration", b =>

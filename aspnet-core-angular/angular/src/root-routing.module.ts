@@ -1,5 +1,7 @@
 ﻿import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import {NoteComponent} from '@app/blog/note/note.component';
+import {NoteBookComponent} from '@app/blog/note-book/note-book.component';
 
 const routes: Routes = [
     { path: '', redirectTo: '/app/home', pathMatch: 'full' },
@@ -14,7 +16,6 @@ const routes: Routes = [
         data: { preload: true }
     }
 ];
-
 @NgModule({
     imports: [RouterModule.forRoot(routes)],
     exports: [RouterModule],
